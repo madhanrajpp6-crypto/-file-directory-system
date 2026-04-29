@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Explorer Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">☁️</span>
+                <h1>Cloud Drive</h1>
+            </div>
+            <div class="actions">
+                <button onclick="openModal('folder')" class="btn primary-btn">+ New Folder</button>
+                <button onclick="openModal('file')" class="btn secondary-btn">+ New File</button>
+            </div>
+        </header>
+
+        <div class="breadcrumb" id="breadcrumb">
+            <!-- Breadcrumbs will be injected here -->
+        </div>
+
+        <main class="file-grid" id="file-grid">
+            <!-- File items will be injected here -->
+        </main>
+    </div>
+
+    <!-- Modal for Create -->
+    <div class="modal-overlay" id="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="modal-title">Create New</h2>
+            <input type="text" id="itemName" placeholder="Enter name..." autocomplete="off">
+            <div class="modal-actions">
+                <button onclick="closeModal()" class="btn cancel-btn">Cancel</button>
+                <button onclick="createItem()" class="btn primary-btn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
