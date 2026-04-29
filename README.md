@@ -92,12 +92,6 @@ http://localhost:3000
 
 ---
 
-## 👨‍💻 Author
-
-Madhan Raj
-
----
-
 ## 📌 Notes
 
 * This project is for educational purposes.
