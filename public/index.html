@@ -3,43 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Explorer Pro</title>
+    <title>Cloud Drive | Premium Storage</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="app-container">
-        <header class="header">
+    <div class="app-wrapper">
+        <aside class="sidebar">
             <div class="logo">
-                <span class="logo-icon">☁️</span>
-                <h1>Cloud Drive</h1>
+                <div class="logo-icon"><i class="fas fa-cloud"></i></div>
+                <span>Cloud Drive</span>
             </div>
-            <div class="actions">
-                <button onclick="openModal('folder')" class="btn primary-btn">+ New Folder</button>
-                <button onclick="openModal('file')" class="btn secondary-btn">+ New File</button>
+            
+            <nav class="nav-group">
+                <div class="nav-item active" onclick="navigateToHome()">
+                    <i class="fas fa-home"></i>
+                    <span>All Files</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-star"></i>
+                    <span>Starred</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Recent</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-trash"></i>
+                    <span>Trash</span>
+                </div>
+            </nav>
+
+            <div class="nav-group" style="margin-top: auto;">
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
             </div>
-        </header>
+        </aside>
 
-        <div class="breadcrumb" id="breadcrumb">
-            <!-- Breadcrumbs will be injected here -->
-        </div>
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search files, folders..." oninput="handleSearch()">
+                </div>
+                <div class="actions">
+                    <button onclick="openModal('folder')" class="btn btn-primary">
+                        <i class="fas fa-folder-plus"></i> New Folder
+                    </button>
+                    <button onclick="openModal('file')" class="btn btn-secondary">
+                        <i class="fas fa-file-alt"></i> New File
+                    </button>
+                </div>
+            </header>
 
-        <main class="file-grid" id="file-grid">
-            <!-- File items will be injected here -->
+            <div class="view-header">
+                <div class="breadcrumb" id="breadcrumb">
+                    <!-- Breadcrumbs injected here -->
+                </div>
+            </div>
+
+            <div class="file-grid" id="file-grid">
+                <!-- File items injected here -->
+            </div>
         </main>
     </div>
 
-    <!-- Modal for Create -->
+    <!-- Create Modal -->
     <div class="modal-overlay" id="modal" style="display: none;">
         <div class="modal-content">
             <h2 id="modal-title">Create New</h2>
             <input type="text" id="itemName" placeholder="Enter name..." autocomplete="off">
             <div class="modal-actions">
-                <button onclick="closeModal()" class="btn cancel-btn">Cancel</button>
-                <button onclick="createItem()" class="btn primary-btn">Create</button>
+                <button onclick="closeModal()" class="btn btn-secondary">Cancel</button>
+                <button onclick="createItem()" class="btn btn-primary">Create</button>
             </div>
         </div>
     </div>
+
+    <!-- Editor Modal -->
+    <div class="modal-overlay" id="editor-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 700px;">
+            <h2 id="editor-title">Edit File</h2>
+            <textarea id="fileContent" placeholder="Start typing..." spellcheck="false" style="height: 400px; font-family: 'Fira Code', monospace;"></textarea>
+            <div class="modal-actions">
+                <button onclick="closeEditorModal()" class="btn btn-secondary">Cancel</button>
+                <button onclick="saveFileContent()" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rename Modal -->
+    <div class="modal-overlay" id="rename-modal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="rename-title">Rename Item</h2>
+            <input type="text" id="renameName" placeholder="New name..." autocomplete="off">
+            <div class="modal-actions">
+                <button onclick="closeRenameModal()" class="btn btn-secondary">Cancel</button>
+                <button onclick="submitRename()" class="btn btn-primary">Rename</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
 
     <script src="app.js"></script>
 </body>
